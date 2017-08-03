@@ -1,73 +1,73 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
-
-const loading_style = {
-    position: 'relative',
-    margin: '0px auto',
-    width: '40px',
-    height: '40px',
-};
-
-const svg_style = {
-    animation: 'rotate 2s linear infinite',
-    height: '100%',
-    transformOrigin: 'center center',
-    width: '100%',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    margin: 'auto'
-};
-
-const circle_style = {
-    strokeDasharray: '1,200',
-    strokeDashoffset: '0',
-    animation: 'dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite',
-    strokeLinecap: 'round'
-};
-
-
-const animation = `@keyframes rotate {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-@keyframes dash {
-    0% {
-        stroke-dasharray: 1,200;
-        stroke-dashoffset: 0;
-    }
-    50% {
-        stroke-dasharray: 89,200;
-        stroke-dashoffset: -35px;
-    }
-    100% {
-        stroke-dasharray: 89,200;
-        stroke-dashoffset: -124px;
-    }
-}
-@keyframes color {
-    100%, 0% {
-        stroke: #d62d20;
-    }
-    40% {
-        stroke: #0057e7;
-    }
-    66% {
-        stroke: #008744;
-    }
-    80%, 90% {
-        stroke: #ffa700;
-    }
-}`;
-
-
 class Loading extends React.Component {
     render () {
-        let { component, className, isLoading, children } = this.props;
+        let { component, className, isLoading, children, colors } = this.props;
+        
+        const loading_style = {
+            position: 'relative',
+            margin: '0px auto',
+            width: '100px',
+            height: '100px',
+        };
+
+        const svg_style = {
+            animation: 'rotate 2s linear infinite',
+            height: '100%',
+            transformOrigin: 'center center',
+            width: '100%',
+            position: 'absolute',
+            top: 40vh,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            margin: 'auto'
+        };
+
+        const circle_style = {
+            strokeDasharray: '1,200',
+            strokeDashoffset: '0',
+            animation: 'dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite',
+            strokeLinecap: 'round'
+        };
+
+
+        const animation = `@keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes dash {
+            0% {
+                stroke-dasharray: 1,200;
+                stroke-dashoffset: 0;
+            }
+            50% {
+                stroke-dasharray: 89,200;
+                stroke-dashoffset: -35px;
+            }
+            100% {
+                stroke-dasharray: 89,200;
+                stroke-dashoffset: -124px;
+            }
+        }
+
+        @keyframes color {
+            100%, 0% {
+                stroke: colors[0];
+            }
+            40% {
+                stroke: colors[1];
+            }
+            66% {
+                stroke: colors[2];
+            }
+            80%, 90% {
+                stroke: colors[3];
+            }
+        }`;
 
         if (isLoading) {
             let { width, height, margin, style } = this.props;
@@ -98,7 +98,8 @@ Loading.propTypes = {
     width: PropTypes.string,
     height: PropTypes.string,
     margin: PropTypes.string,
-    component: PropTypes.any
+    component: PropTypes.any,
+    colors: PropTypes.array
 };
 
 
@@ -109,7 +110,8 @@ Loading.defaultProps = {
     width: '40px',
     height: '40px',
     margin: '0 auto',
-    component: 'div'
+    component: 'div',
+    colors: ['#000000', '#000000', '#000000', '#000000']
 };
 
 
